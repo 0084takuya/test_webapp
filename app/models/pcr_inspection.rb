@@ -1,0 +1,2 @@
+class PcrInspection < ApplicationRecord
+end
