@@ -69,6 +69,6 @@ class PcrInspectionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pcr_inspection_params
-      params.require(:pcr_inspection).permit(:subject_id, :clinic_id, :result, :remarks)
+      params.require(:pcr_inspection).permit(:subject_id, :clinic_id, :result, :remarks,:testday)
     end
 end
