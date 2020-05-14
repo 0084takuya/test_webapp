@@ -1,7 +1,11 @@
+<div class="container">
+<div class="row">
+  <div class="col-md-8 col-md-offset-3　">
 <%= form_with(model: pcr_inspection, local: true) do |form| %>
-  <% if pcr_inspection.errors.any? %>
+ 
+<% if pcr_inspection.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(pcr_inspection.errors.count, "error") %> prohibited this pcr_inspection from being saved:</h2>
+      <h2><%= pluralize(pcr_inspection.errors.count, "error") %> prohibited this subject from being saved:</h2>
 
       <ul>
       <% pcr_inspection.errors.full_messages.each do |message| %>
@@ -9,29 +13,39 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
-
+      <% end %>
   <div class="field">
-    <%= form.label :subject_id %>
-    <%= form.number_field :subject_id, id: :pcr_inspection_subject_id %>
+    <%= form.label :被験者 %>
+    <%= form.select :subject_id,Subject.all.map{|o| [o.name, o.id]},{ include_blank: true}, {:class => "form-control"} %>
+
   </div>
 
   <div class="field">
-    <%= form.label :clinic_id %>
-    <%= form.number_field :clinic_id, id: :pcr_inspection_clinic_id %>
+    <%= form.label :診療所 %>
+    <%= form.select :clinic_id,Clinic.all.map{|o| [o.name, o.id]},{ include_blank: true}, {:class => "form-control"} %>
+  </div>
+<div class="field">
+    <%= form.label :検査日 %>
+    <div class=" ol-md-2">
+      <%= form.date_select :testday, {use_month_numbers: true,start_year:1920,end_year:(Time.now.year),default:Date.new(2020, 1, 1)}, {class: "form-control bootstrap-date"} %>
+    </div>
+
+  </div>
+  <div class="field">
+    <%= form.label :検査結果 %>
+    <%= form.select :result, {"陽性" => "1", "陰性" => "2"},{ include_blank: true}, {:class => "form-control"} %>
+
   </div>
 
   <div class="field">
-    <%= form.label :result %>
-    <%= form.number_field :result, id: :pcr_inspection_result %>
-  </div>
-
-  <div class="field">
-    <%= form.label :remarks %>
-    <%= form.text_field :remarks, id: :pcr_inspection_remarks %>
+    <%= form.label :備考 %>
+    <%= form.text_field :remarks,  class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "登録" ,class: "btn btn-primary"%>
   </div>
 <% end %>
+  </div>
+</div>
+</div>
