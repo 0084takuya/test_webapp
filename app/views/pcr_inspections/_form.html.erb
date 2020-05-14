@@ -1,0 +1,37 @@
+<%= form_with(model: pcr_inspection, local: true) do |form| %>
+  <% if pcr_inspection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pcr_inspection.errors.count, "error") %> prohibited this pcr_inspection from being saved:</h2>
+
+      <ul>
+      <% pcr_inspection.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :subject_id %>
+    <%= form.number_field :subject_id, id: :pcr_inspection_subject_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clinic_id %>
+    <%= form.number_field :clinic_id, id: :pcr_inspection_clinic_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :result %>
+    <%= form.number_field :result, id: :pcr_inspection_result %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remarks %>
+    <%= form.text_field :remarks, id: :pcr_inspection_remarks %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
