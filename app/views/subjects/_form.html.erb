@@ -1,37 +1,42 @@
-<%= form_with(model: subject, local: true) do |form| %>
-  <% if subject.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
-
-      <ul>
-      <% subject.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-3">
+      <%= form_with(model: subject, local: true) do |form| %>
+        <% if subject.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+            <ul>
+              <% subject.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+                <% end %>
+            </ul>
+          </div>
+          <% end %>
+            <div class="field">
+              <%= form.label :名前 %>
+                <%= form.text_field :name, id: :subject_name, class: 'form-control' %>
+            </div>
+            <div class="field">
+              <%= form.label :性別 %>
+                <%= form.select :gender, {"男" => "1", "女" => "2"},{include_blank: true}, {:class => "form-control"} %>
+            </div>
+            <div class="field" 　>
+              <%= form.label :誕生日 %>
+                  <div class=" ol-md-2">
+                    <%= form.date_select :birthday, {use_month_numbers: true,start_year:1920,end_year:(Time.now.year),default:Date.new(2020, 1, 1)}, {class: "form-control bootstrap-date"} %>
+                  </div>
+            </div>
+            <div class="field">
+              <%= form.label :メールアドレス %>
+                <%= form.email_field :address, id: :subject_address , class: 'form-control'%>
+            </div>
+            <div class="actions">
+              <%= form.submit "登録" ,class: "btn btn-primary"%>
+            </div>
+            <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :subject_name %>
   </div>
-
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.number_field :gender, id: :subject_gender %>
-  </div>
-
-  <div class="field">
-    <%= form.label :birthday %>
-    <%= form.date_select :birthday, id: :subject_birthday %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :subject_address %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
