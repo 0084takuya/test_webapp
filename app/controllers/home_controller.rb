@@ -8,7 +8,13 @@ class HomeController < ApplicationController
        else 
         @positive += 1
        end
-       end
+    end
+    
+    if @negative == 0 then
+      @proportion = 0
+    else 
+        @proportion = @negative.to_f / PcrInspection.count*100
+    end
     @pcr_n = PcrInspection.where(result: 1).order('date(testDay)')
   end
 
